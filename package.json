@@ -5,9 +5,12 @@
   "homepage": "https://NoVaGamesAndStuff.github.io/portfolio",
   "dependencies": {
     "cra-template": "1.2.0",
+    "framer-motion": "^11.14.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
