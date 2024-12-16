@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
+import { motion } from 'framer-motion';
 
 const App = () => {
     const [theme, setTheme] = useState('light');
@@ -13,25 +16,60 @@ const App = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
+    // Particle.js Config
+    const particlesInit = async (main) => {
+        await loadFull(main);
+    };
+
     return (
         <>
+            {/* Particles Background */}
+            <Particles
+                id="tsparticles"
+                init={particlesInit}
+                options={{
+                    background: { color: theme === 'light' ? '#f0f0f0' : '#111' },
+                    particles: {
+                        color: { value: theme === 'light' ? '#000' : '#fff' },
+                        links: { enable: true, color: '#888' },
+                        move: { enable: true, speed: 2 },
+                        number: { value: 50 },
+                    },
+                }}
+            />
+
             {/* Theme Toggle */}
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-            </button>
+            <motion.button
+                className="theme-toggle"
+                onClick={toggleTheme}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+            </motion.button>
 
             {/* Header */}
             <header>
-                <h1>Noah Vaknin</h1>
+                <motion.h1
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                >
+                    Noah Vaknin
+                </motion.h1>
                 <p>Software Engineer & (Occasionally) Game Dev</p>
             </header>
 
             {/* Navigation */}
-            <nav>
+            <motion.nav
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+            >
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
-            </nav>
+            </motion.nav>
 
             {/* About Section */}
             <section id="about">
@@ -45,58 +83,40 @@ const App = () => {
             {/* Projects Section */}
             <section id="projects">
                 <h2>Projects</h2>
+                <div className="project-card-container">
+                    <motion.div
+                        className="project-card"
+                        whileHover={{ scale: 1.05, rotate: 1 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <h3>Who Would Win</h3>
+                        <p>An anime battle website leveraging the Anilist API.</p>
+                        <a href="https://github.com/NoVaGamesAndStuff/WhoWouldWin" target="_blank">
+                            View Project
+                        </a>
+                    </motion.div>
 
-                <div className="project">
-                    <h3>Who Would Win</h3>
-                    <p>
-                        An anime battle website leveraging the Anilist API and React in conjunction with Axios to match
-                        up characters.
-                    </p>
-                    <a href="https://github.com/NoVaGamesAndStuff/WhoWouldWin" target="_blank" rel="noopener noreferrer">
-                        View Project
-                    </a>
+                    <motion.div
+                        className="project-card"
+                        whileHover={{ scale: 1.05, rotate: -1 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <h3>Jeopardy</h3>
+                        <p>A Jeopardy game developed using React and Redux.</p>
+                        <a href="https://github.com/NoVaGamesAndStuff/Jeopardy" target="_blank">
+                            View Project
+                        </a>
+                    </motion.div>
+
+                    <motion.div
+                        className="project-card"
+                        whileHover={{ scale: 1.05, rotate: 1 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <h3>Alchemight</h3>
+                        <p>Unity roguelike project focusing on battle mechanics.</p>
+                        <a href="https://github.com/mlitman530/Alchemight" target="_blank">
+                            View Project
+                        </a>
+                    </motion.div>
                 </div>
-
-                <div className="project">
-                    <h3>Jeopardy</h3>
-                    <p>
-                        A Jeopardy game developed using React and Redux for state management. Users can play custom
-                        Jeopardy games with various categories.
-                    </p>
-                    <a href="https://github.com/NoVaGamesAndStuff/Jeopardy" target="_blank" rel="noopener noreferrer">
-                        View Project
-                    </a>
-                </div>
-
-                <div className="project">
-                    <h3>Alchemight</h3>
-                    <p>Unity roguelike project focusing on battle mechanics, potion effects, and level design.</p>
-                    <img src="AlchemightHomeScreen.png" alt="Alchemight Home" />
-                    <img src="AlchemightBattle.png" alt="Alchemight Battle" />
-                    <a href="https://github.com/mlitman530/Alchemight" target="_blank" rel="noopener noreferrer">
-                        View Project
-                    </a>
-                </div>
-            </section>
-
-            {/* Contact Section */}
-            <section id="contact">
-                <h2>Contact</h2>
-                <p>
-                    Reach me via <a href="mailto:noah.vaknin27@gmail.com">Email</a> or{' '}
-                    <a href="http://www.linkedin.com/in/noah-vaknin" target="_blank" rel="noopener noreferrer">
-                        LinkedIn
-                    </a>.
-                </p>
-            </section>
-
-            {/* Footer */}
-            <footer>
-                <p>&copy; 2024 Noah Vaknin. All Rights Reserved.</p>
-            </footer>
-        </>
-    );
-};
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
