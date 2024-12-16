@@ -91,7 +91,7 @@ const App = () => {
                     >
                         <h3>Who Would Win</h3>
                         <p>An anime battle website leveraging the Anilist API.</p>
-                        <a href="https://github.com/NoVaGamesAndStuff/WhoWouldWin" target="_blank">
+                        <a href="https://github.com/NoVaGamesAndStuff/WhoWouldWin" target="_blank" rel="noopener noreferrer">
                             View Project
                         </a>
                     </motion.div>
@@ -103,7 +103,7 @@ const App = () => {
                     >
                         <h3>Jeopardy</h3>
                         <p>A Jeopardy game developed using React and Redux.</p>
-                        <a href="https://github.com/NoVaGamesAndStuff/Jeopardy" target="_blank">
+                        <a href="https://github.com/NoVaGamesAndStuff/Jeopardy" target="_blank" rel="noopener noreferrer">
                             View Project
                         </a>
                     </motion.div>
@@ -115,8 +115,21 @@ const App = () => {
                     >
                         <h3>Alchemight</h3>
                         <p>Unity roguelike project focusing on battle mechanics.</p>
-                        <a href="https://github.com/mlitman530/Alchemight" target="_blank">
+                        <a href="https://github.com/mlitman530/Alchemight" target="_blank" rel="noopener noreferrer">
                             View Project
                         </a>
                     </motion.div>
                 </div>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>Feel free to reach out for collaborations or just to say hi!</p>
+            </section>
+        </>
+    );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
