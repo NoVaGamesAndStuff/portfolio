@@ -1,137 +1,121 @@
-// src/App.js
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Particles } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import { loadEmittersPlugin } from "@tsparticles/plugin-emitters";
-import { loadAbsorbersPlugin } from "@tsparticles/plugin-absorbers";
+import { motion } from "framer-motion";
 import "./App.css";
+import projects from "./projects";
 
 const App = () => {
-  // Initialize particles
-  const particlesInit = useCallback(async (engine) => {
-    console.log("Initializing particles...");
-    await loadSlim(engine);
-    await loadEmittersPlugin(engine);
-    await loadAbsorbersPlugin(engine);
-  }, []);
+  const [theme, setTheme] = useState("light");
 
-  const particlesLoaded = useCallback(async (container) => {
-    console.log("Particles container loaded:", container);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  // Particles Init
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
   }, []);
 
   return (
-    <div>
+    <div className={`app ${theme}`}>
       {/* Particles Background */}
       <Particles
         id="tsparticles"
         init={particlesInit}
-        loaded={particlesLoaded}
         options={{
-          background: { color: { value: "#f9f9f9" } },
+          background: { color: theme === "light" ? "#f0f0f0" : "#111" },
           particles: {
-            number: { value: 80 },
-            color: { value: "#3498db" },
-            size: { value: 3 },
+            color: { value: theme === "light" ? "#000" : "#fff" },
+            links: { enable: true, color: theme === "light" ? "#888" : "#fff" },
             move: { enable: true, speed: 2 },
-            links: { enable: true, color: "#3498db", distance: 150 },
+            number: { value: 60 },
+            size: { value: 3 },
           },
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: "repulse" },
-              onClick: { enable: true, mode: "push" },
-            },
-            modes: {
-              repulse: { distance: 100 },
-              push: { quantity: 4 },
-            },
-          },
-          detectRetina: true,
         }}
-        style={{ position: "absolute", zIndex: -1 }}
       />
 
-      {/* Navbar */}
-      <nav className="navbar">
-        <h1>Noah Vaknin</h1>
-        <ul>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-        </ul>
-      </nav>
+      {/* Theme Toggle */}
+      <motion.button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+      </motion.button>
 
-      {/* Main Content */}
-      <div className="content">
-        {/* About Section */}
-        <section id="about" className="section">
-          <h2>About Me</h2>
-          <p>
-            Hello! My name is Noah, and I am a freshly graduated five-year
-            software engineering student passionate about software engineering
-            and game development.
-          </p>
-        </section>
+      {/* Header */}
+      <header>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Noah Vaknin
+        </motion.h1>
+        <p>Software Engineer & (Occasionally) Game Dev</p>
+      </header>
 
-        {/* Projects Section */}
-        <section id="projects" className="section">
-          <h2>Projects</h2>
-          <div className="project-container">
-            <div className="project-card">
-              <h3>Who Would Win</h3>
-              <p>An anime battle website leveraging the AniList API.</p>
-              <a href="#!">View Project</a>
-            </div>
-            <div className="project-card">
-              <h3>Jeopardy</h3>
-              <p>A Jeopardy game developed using Express and Socket.IO.</p>
-              <a href="#!">View Project</a>
-            </div>
-            <div className="project-card">
-              <h3>Alchemight</h3>
-              <p>Unity roguelike project focusing on potion battle mechanics.</p>
-              <a href="#!">View Project</a>
-            </div>
-          </div>
-        </section>
+      {/* Navigation */}
+      <motion.nav
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      >
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </motion.nav>
 
-        {/* Contact Section */}
-        <section id="contact" className="section">
-          <h2>Contact</h2>
-          <p>
-            Feel free to reach out for collaborations or just to say hi!
-          </p>
-          <p>
-            <strong>Email:</strong>{" "}
-            <a href="mailto:noahvaknin@example.com">noahvaknin@example.com</a>
-          </p>
-          <p>
-            <strong>LinkedIn:</strong>{" "}
-            <a
-              href="https://linkedin.com/in/noahvaknin"
-              target="_blank"
-              rel="noreferrer"
+      {/* About Section */}
+      <section id="about" className="section">
+        <h2>About Me</h2>
+        <p>
+          Hello! My name is Noah, and I am a freshly graduated five-year software
+          engineering student passionate about software engineering and game
+          development.
+        </p>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="section">
+        <h2>Projects</h2>
+        <div className="project-card-container">
+          {projects.map((project, index) => (
+            <motion.div
+              className="project-card"
+              key={project.id}
+              whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 1 : -1 }}
+              transition={{ duration: 0.3 }}
             >
-              linkedin.com/in/noahvaknin
-            </a>
-          </p>
-          <p>
-            <strong>GitHub:</strong>{" "}
-            <a
-              href="https://github.com/NoVaGamesAndStuff"
-              target="_blank"
-              rel="noreferrer"
-            >
-              github.com/NoVaGamesAndStuff
-            </a>
-          </p>
-        </section>
-      </div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Project
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="section">
+        <h2>Contact</h2>
+        <p>
+          Feel free to reach out for collaborations or just to say hi! <br />
+          <strong>Email:</strong>{" "}
+          <a href="mailto:noahvaknin@example.com">noahvaknin@example.com</a>
+        </p>
+      </section>
     </div>
   );
 };

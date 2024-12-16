@@ -1,48 +1,23 @@
-// Projects.js
 import React from "react";
-import { motion } from "framer-motion";
+import projects from "../projects";
 
-const Projects = () => (
-    <section id="projects" style={{ padding: "2rem 0" }}>
-        <h2 style={{ textAlign: "center", marginBottom: "1.5rem" }}>Projects</h2>
-        <div className="project-card-container">
-            <motion.div
-                className="project-card"
-                whileHover={{ scale: 1.05, rotate: 1 }}
-                transition={{ duration: 0.3 }}
-            >
-                <h3>Who Would Win</h3>
-                <p>An anime battle website leveraging the Anilist API.</p>
-                <a href="https://github.com/NoVaGamesAndStuff/WhoWouldWin" target="_blank" rel="noopener noreferrer">
-                    View Project
-                </a>
-            </motion.div>
-
-            <motion.div
-                className="project-card"
-                whileHover={{ scale: 1.05, rotate: -1 }}
-                transition={{ duration: 0.3 }}
-            >
-                <h3>Jeopardy</h3>
-                <p>A Jeopardy game developed using Express and Socket.IO .</p>
-                <a href="https://github.com/NoVaGamesAndStuff/Jeopardy" target="_blank" rel="noopener noreferrer">
-                    View Project
-                </a>
-            </motion.div>
-
-            <motion.div
-                className="project-card"
-                whileHover={{ scale: 1.05, rotate: 1 }}
-                transition={{ duration: 0.3 }}
-            >
-                <h3>Alchemight</h3>
-                <p>Unity roguelike project focusing on potion battle mechanics.</p>
-                <a href="https://github.com/mlitman530/Alchemight" target="_blank" rel="noopener noreferrer">
-                    View Project
-                </a>
-            </motion.div>
-        </div>
+const Projects = () => {
+  return (
+    <section id="projects" className="section">
+      <h2>Projects</h2>
+      <div className="projects">
+        {projects.map((project) => (
+          <div className="card" key={project.id}>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <a href={project.link} target="_blank" rel="noopener noreferrer">
+              View Project
+            </a>
+          </div>
+        ))}
+      </div>
     </section>
-);
+  );
+};
 
 export default Projects;
