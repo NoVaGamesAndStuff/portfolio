@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+header {
+    background-color: var(--primary);
+    color: var(--header-text);
+    padding: 1rem;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--secondary);
+    padding: 0.5rem 0;
+}
+nav a {
+    color: var(--nav-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+section {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+.project {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--card);
+}
+.project img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary);
+    color: var(--footer-text);
+    margin-top: 2rem;
+}
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary);
+    color: var(--nav-text);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+:root {
+    --background: #f4f4f9;
+    --text: #333;
+    --primary: #007acc;
+    --secondary: #005fa3;
+    --nav-text: white;
+    --header-text: white;
+    --footer-text: white;
+    --card: white;
+    --border: #ddd;
+}
+
+[data-theme="dark"] {
+    --background: #121212;
+    --text: #e0e0e0;
+    --primary: #1a73e8;
+    --secondary: #333;
+    --nav-text: #e0e0e0;
+    --header-text: #e0e0e0;
+    --footer-text: #e0e0e0;
+    --card: #1e1e1e;
+    --border: #444;
+}
