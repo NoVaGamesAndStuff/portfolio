@@ -111,9 +111,9 @@ const App = () => {
       <section id="contact" className="section">
         <h2>Contact</h2>
         <p>
-          Feel free to reach out for collaborations or just to say hi! <br />
+          Feel free to reach out for work inquiries or just to say hi! <br />
           <strong>Email:</strong>{" "}
-          <a href="mailto:noahvaknin@example.com">noahvaknin@example.com</a>
+          <a href="mailto:noah.vaknin27@gmail.com">noah.vaknin27@gmail.com</a>
         </p>
       </section>
     </div>
